@@ -1,0 +1,76 @@
+class Persona:
+    def __init__(self, nombre, edad, correo):
+        self.nombre = nombre
+        self.edad = edad
+        self.correo = correo
+
+    def __str__(self):
+        return f"Nombre: {self.nombre}, Edad: {self.edad}, Correo: {self.correo}"
+
+
+class GestionDatos:
+    def __init__(self):
+        self.personas = []
+
+    def agregar_persona(self):
+        nombre = input("Nombre: ")
+        while True:
+            try:
+                edad = int(input("Edad: "))
+                break
+            except ValueError:
+                print("Edad no válida. Intente de nuevo.")
+
+        correo = input("Correo electrónico: ")
+        persona = Persona(nombre, edad, correo)
+        self.personas.append(persona)
+        print("Persona agregada.")
+
+    def ver_personas(self):
+        if not self.personas:
+            print("No hay personas registradas.")
+            return
+
+        print("Personas registradas:")
+        for persona in self.personas:
+            print(persona)
+
+    def buscar_persona(self):
+        nombre_buscar = input("Ingrese el nombre a buscar: ")
+        resultados = [p for p in self.personas if nombre_buscar.lower() in p.nombre.lower()]
+
+        if not resultados:
+            print("No se encontraron coincidencias.")
+            return
+
+        print("Resultados de la búsqueda:")
+        for persona in resultados:
+            print(persona)
+
+
+def main():
+    gestion_datos = GestionDatos()
+
+    while True:
+        print("\nMenú:")
+        print("1. Agregar persona")
+        print("2. Ver personas")
+        print("3. Buscar persona")
+        print("4. Salir")
+
+        opcion = input("Ingrese la opción: ")
+
+        if opcion == "1":
+            gestion_datos.agregar_persona()
+        elif opcion == "2":
+            gestion_datos.ver_personas()
+        elif opcion == "3":
+            gestion_datos.buscar_persona()
+        elif opcion == "4":
+            break
+        else:
+            print("Opción no válida.")
+
+
+if __name__ == "__main__":
+    main()

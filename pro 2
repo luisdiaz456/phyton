@@ -1,0 +1,55 @@
+from enum import Enum
+
+class Raza(Enum):
+    Humano = 0
+    Elfo = 1
+    Enano = 2
+    Orco = 3
+
+class Clase(Enum):
+    Guerrero = 0
+    Mago = 1
+    Arquero = 2
+    Picaro = 3
+
+class Personaje:
+    def __init__(self, nombre, raza, clase, fuerza, inteligencia, destreza):
+        self.nombre = nombre
+        self.raza = raza
+        self.clase = clase
+        self.fuerza = fuerza
+        self.inteligencia = inteligencia
+        self.destreza = destreza
+
+def main():
+    print("Creador de personaje")
+
+    nombre = input("Nombre del personaje: ")
+
+    print("Elige la raza:")
+    for raza in Raza:
+        print(f"{raza.value}. {raza.name}")
+    raza_elegida = Raza(int(input()))
+
+    print("Elige la clase:")
+    for clase in Clase:
+        print(f"{clase.value}. {clase.name}")
+    clase_elegida = Clase(int(input()))
+
+    print("Asigna puntos a las estadísticas (total 30 puntos):")
+    fuerza = int(input("Fuerza: "))
+    inteligencia = int(input("Inteligencia: "))
+    destreza = int(input("Destreza: "))
+
+    nuevo_personaje = Personaje(nombre, raza_elegida, clase_elegida, fuerza, inteligencia, destreza)
+
+    print("\nPersonaje creado:")
+    print(f"Nombre: {nuevo_personaje.nombre}")
+    print(f"Raza: {nuevo_personaje.raza.name}")
+    print(f"Clase: {nuevo_personaje.clase.name}")
+    print(f"Fuerza: {nuevo_personaje.fuerza}")
+    print(f"Inteligencia: {nuevo_personaje.inteligencia}")
+    print(f"Destreza: {nuevo_personaje.destreza}")
+
+if __name__ == "__main__":
+    main()

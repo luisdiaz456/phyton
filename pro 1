@@ -1,0 +1,88 @@
+class Producto:
+    def __init__(self, nombre, cantidad, precio):
+        self.nombre = nombre
+        self.cantidad = cantidad
+        self.precio = precio
+
+    def __str__(self):
+        return f"Nombre: {self.nombre}, Cantidad: {self.cantidad}, Precio: ${self.precio:.2f}"
+
+
+class GestionInventario:
+    def __init__(self):
+        self.inventario = []
+
+    def agregar_producto(self, producto):
+        self.inventario.append(producto)
+        print(f"Producto '{producto.nombre}' agregado al inventario.")
+
+    def mostrar_inventario(self):
+        if not self.inventario:
+            print("El inventario está vacío.")
+            return
+
+        print("Inventario:")
+        for producto in self.inventario:
+            print(producto)
+
+    def buscar_producto(self, nombre):
+        for producto in self.inventario:
+            if producto.nombre.lower() == nombre.lower():
+                return producto
+        return None
+
+
+def agregar_producto_interactivo(gestion_inventario):
+    nombre = input("Nombre del producto: ")
+    while True:
+        try:
+            cantidad = int(input("Cantidad: "))
+            break
+        except ValueError:
+            print("Cantidad no válida. Intente de nuevo.")
+
+    while True:
+        try:
+            precio = float(input("Precio: "))
+            break
+        except ValueError:
+            print("Precio no válido. Intente de nuevo.")
+
+    producto = Producto(nombre, cantidad, precio)
+    gestion_inventario.agregar_producto(producto)
+
+
+def buscar_producto_interactivo(gestion_inventario):
+    nombre_busqueda = input("Nombre del producto a buscar: ")
+    producto_encontrado = gestion_inventario.buscar_producto(nombre_busqueda)
+    if producto_encontrado:
+        print(f"Producto encontrado: {producto_encontrado}")
+    else:
+        print("Producto no encontrado.")
+
+
+def main():
+    gestion_inventario = GestionInventario()
+
+    while True:
+        print("\nOpciones:")
+        print("1. Agregar producto")
+        print("2. Mostrar inventario")
+        print("3. Buscar producto")
+        print("4. Salir")
+        opcion = input("Ingrese la opción: ")
+
+        if opcion == "1":
+            agregar_producto_interactivo(gestion_inventario)
+        elif opcion == "2":
+            gestion_inventario.mostrar_inventario()
+        elif opcion == "3":
+            buscar_producto_interactivo(gestion_inventario)
+        elif opcion == "4":
+            break
+        else:
+            print("Opción no válida.")
+
+
+if __name__ == "__main__":
+    main()

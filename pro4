@@ -1,0 +1,53 @@
+class Libro:
+    def __init__(self, titulo, autor):
+        self.titulo = titulo
+        self.autor = autor
+
+    def __str__(self):
+        return f"Título: {self.titulo}, Autor: {self.autor}"
+
+class Biblioteca:
+    def __init__(self):
+        self.libros = []
+
+    def agregar_libro(self, libro):
+        self.libros.append(libro)
+
+    def mostrar_libros(self):
+        if not self.libros:
+            print("Não há livros na biblioteca.")
+        else:
+            print("Livros na biblioteca:")
+            for livro in self.libros:
+                print(livro)
+
+class ProgramaBiblioteca:
+    @staticmethod
+    def agregar_libro(biblioteca):
+        titulo = input("Título do livro: ")
+        autor = input("Autor do livro: ")
+        livro = Libro(titulo, autor)
+        biblioteca.agregar_libro(livro)
+        print("Livro adicionado.")
+
+    @staticmethod
+    def main():
+        biblioteca = Biblioteca()
+
+        while True:
+            print("\nMenu:")
+            print("1. Adicionar livro")
+            print("2. Mostrar livros")
+            print("3. Sair")
+            opcao = input("Digite a opção: ")
+
+            if opcao == "1":
+                ProgramaBiblioteca.agregar_libro(biblioteca)
+            elif opcao == "2":
+                biblioteca.mostrar_libros()
+            elif opcao == "3":
+                break
+            else:
+                print("Opção inválida.")
+
+ProgramaBiblioteca.main()
